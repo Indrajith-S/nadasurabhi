@@ -1,0 +1,43 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="../public/music.css">
+    </head>
+
+    <body>
+        <h1>Articles</h1>
+        
+        <header class="main-header">
+            <button id="side-menu-toggle">Menu</button>
+            <nav class="main-header__nav">
+                <ul class="main-header__item-list">
+                    <li class="main-header__item">
+                        <a class="<%= path === '/' ? 'active' : '' %>" href="/">Home</a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/concerts' ? 'active' : '' %>" href="/concerts">Concerts</a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/articles' ? 'active' : '' %>" href="/articles">Articles</a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/contact-us' ? 'active' : '' %>" href="/contact-us">Contact Us</a>
+                    </li>
+                    <li class="main-header__item">
+                        <a class="<%= path === '/donate' ? 'active' : '' %>" href="/donate">Donate
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<%= path === '/login' ? 'active' : '' %>" href="/login">
+                            <button className='navBar-buttons-Login clickable' type='button' action="/login">Login</button>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="<%= path === '/signup' ? 'active' : '' %>" href="/signup">
+                            <button className='navBar-buttons-Login clickable' type='button' action="/signup">Sign Up</button>
+                        </a>
+                    </li>    
+                </ul>
+            </nav>
+        </header>
+    </body>
+</html>
