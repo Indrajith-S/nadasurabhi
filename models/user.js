@@ -1,5 +1,6 @@
-const fs= require('fs');
-const path= require('path');
+const fs = require('fs') ,
+ path = require('path') ,
+ util = require('util') ;
 
 const p = path.join(
     path.dirname(process.mainModule.filename),
@@ -7,15 +8,25 @@ const p = path.join(
     'users.json'
 );
 
-const getuserfromfile = cb =>{
-    fs.readFile(p, (err,fileContent) =>{
-        if (err){
-            cb([]);
-        } else {
-            cb(JSON.parse(fileContent));
-        }
-    });
+var getuserfromfile;
+function getValues()
+{
+  fs.readFile(p, function(err,fileContent){
+    if (err){
+        writeValue([]);
+        process.exit(1);
+    } else {
+        writeValue(JSON.parse(fileContent));
+    }
+  })
 };
+
+
+
+function writeValue(contents){
+  getuserfromfile = contents;
+}
+getValues();
 
 // module.exports= class User {
 //     constructor(username, password){
@@ -34,6 +45,23 @@ const getuserfromfile = cb =>{
 
 // };
 
+/**
+ * const p = path.join(
+          path.dirname(process.mainModule.filename),
+          'data',
+          'users.json'
+        );
+        fs.readFile(p, (err, fileContent) => {
+            let users = [];
+            if (!err) {
+              users = JSON.parse(fileContent);
+            }
+            users.push(this);
+            fs.writeFile(p, JSON.stringify(users), err => {
+              console.log(err);
+            });
+      });
+ */
 
 
 module.exports = class User {
@@ -42,22 +70,37 @@ module.exports = class User {
       this.password = p;
     }
   
-    save() {
+    checkLogin() {
+      const index = getuserfromfile.findIndex(values =>{
+        return( values.username ===  this.username && values.password === this.password )
+      });
+      
+      if(index !== -1 ){
+        console.log("Logged In")
+        return true;
+      }
+      else{
+        console.log("Bhosdike Name shi Dallo")
+        return false;
+      }
+    }
+
+
+    saveInfo(){
       const p = path.join(
         path.dirname(process.mainModule.filename),
         'data',
         'users.json'
       );
       fs.readFile(p, (err, fileContent) => {
-        let users = [];
-        if (!err) {
-          users = JSON.parse(fileContent);
-        }
-        users.push(this);
-        fs.writeFile(p, JSON.stringify(users), err => {
-          console.log(err);
-        });
-      });
-    console.log(getuserfromfile);
+          let users = [];
+          if (!err) {
+            users = JSON.parse(fileContent);
+          }
+          users.push(this);
+          fs.writeFile(p, JSON.stringify(users), err => {
+            console.log(err);
+          });
+    });
     }
 }
