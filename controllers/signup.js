@@ -9,7 +9,7 @@ exports.postentersignup = (req,res,next) =>{
     const username= req.body.name;
     const password= req.body.pass;
     const user= new User(username,password);
-    user.save();
+    user.saveInfo();
     console.log(req.body);
     res.redirect('/login');
 };

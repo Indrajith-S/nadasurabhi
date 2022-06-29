@@ -9,7 +9,7 @@ exports.postenteruser = (req,res,next) =>{
     const username= req.body.name;
     const password= req.body.pass;
     const user= new User(username,password);
-    user.save();
+    const login = user.checkLogin();
     console.log(req.body);
-    res.redirect('/home');
+    login && res.redirect('/home');
 };
